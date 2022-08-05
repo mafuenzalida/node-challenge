@@ -5,4 +5,4 @@ import knexconfig from '../../../config/knexconfig';
 const env = process.env.NODE_ENV || 'development';
 const configOptions = knexconfig[env];
 
-module.exports = knex(configOptions);
+export default knex(configOptions);
