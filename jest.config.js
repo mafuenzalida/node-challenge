@@ -31,4 +31,8 @@ module.exports = {
     '<rootDir>/test/utils/jest/error-matchers.ts',
   ],
   testEnvironment: 'node',
+  transform: {
+    '^.+\\.(ts|tsx)?$': 'ts-jest',
+    "^.+\\.(js|jsx)$": "babel-jest",
+  }
 };

@@ -9,7 +9,6 @@ const knexconfig = {
     },
     seeds: { directory: './data/seeds' },
   },
-
   testing: {
     client: 'pg',
     connection: config.dbL,
@@ -18,7 +17,14 @@ const knexconfig = {
     },
     seeds: { directory: './data/seeds' },
   },
-
+  qa: {
+    client: 'pg',
+    connection: config.dbL,
+    migrations: {
+      directory: './data/migrations',
+    },
+    seeds: { directory: './data/seeds' },
+  },
   production: {
     client: 'pg',
     connection: config.db,
