@@ -25,11 +25,11 @@ describe('[Packages | User-domain | Formatter] secureTrim', () => {
       last_name: 'Smith',
       company_name: 'Pleo',
       ssn: 1,
-    })).toEqual(JSON.stringify({
+    })).toEqual({
       first_name: 'John',
       last_name: 'Smith',
       company_name: 'Pleo',
-    }));
+    });
   });
 });
 
