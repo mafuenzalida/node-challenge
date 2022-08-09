@@ -8,16 +8,25 @@ app.use('/', router);
 
 jest.mock('@nc/domain-expense/data/db-expense')
 
-const fakeUserExpenses = [{
-  id: 'some-id',
-  user_id: 'user-id',
-  merchant_name: 'some-merchant',
-  currency: 'USD',
-  amount_in_cents: 10,
-  status: 'pending',
-  date_created: 'some-date',
-}]
-const fakeUserExpensesResponse = [{
+const fakePagination = {
+  perPage: 10,
+  currentPage: 1,
+  from: 0,
+  to: 1
+}
+const fakeDbUserExpenses = {
+  data : [{
+    id: 'some-id',
+    user_id: 'user-id',
+    merchant_name: 'some-merchant',
+    currency: 'USD',
+    amount_in_cents: 10,
+    status: 'pending',
+    date_created: 'some-date',
+  }],
+  pagination: fakePagination
+}
+const fakeUserExpensesDataResponse = [{
   id: 'some-id',
   user_id: 'user-id',
   merchant_name: 'some-merchant',
@@ -31,7 +40,7 @@ const fakeUserExpensesResponse = [{
 describe('V1-get-expenses routes tests', () => {
   beforeAll(() => {
     const mockGetExpensesByUser = dbExpense.getExpensesByUser as jest.MockedFunction<typeof dbExpense.getExpensesByUser>;;
-    mockGetExpensesByUser.mockResolvedValue(fakeUserExpenses)
+    mockGetExpensesByUser.mockResolvedValue(fakeDbUserExpenses)
   })
 
   it('GET /get-expenses-by-user - success', async () => {
@@ -39,7 +48,7 @@ describe('V1-get-expenses routes tests', () => {
       .get('/get-expenses-by-user')
       .query({ userId: 'fake-uuid' });
     expect(res.statusCode).toEqual(200)
-    expect(res.body).toEqual(fakeUserExpensesResponse)
+    expect(res.body.data).toEqual(fakeUserExpensesDataResponse)
   })
 
   it('GET /get-expenses-by-user - fails when not sending userId', async () => {
@@ -51,7 +60,7 @@ describe('V1-get-expenses routes tests', () => {
 
   it('GET /get-expenses-by-user - fails when there is no data for user', async () => {
     const mockGetExpensesByUser = dbExpense.getExpensesByUser as jest.MockedFunction<typeof dbExpense.getExpensesByUser>;;
-    mockGetExpensesByUser.mockResolvedValue(null)
+    mockGetExpensesByUser.mockResolvedValue({data: null, pagination: fakePagination})
    
     const res = await request(app)
       .get('/get-expenses-by-user')
