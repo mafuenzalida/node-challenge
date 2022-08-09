@@ -8,18 +8,25 @@ export const router = Router();
 
 router.get('/get-expenses-by-user', async (req, res, next) => {
   const userId = req.query?.userId as string
-  const paginateParams = { 
+  const options = { 
     perPage: parseInt(req.query?.perPage as string), 
-    currentPage: parseInt(req.query?.currentPage as string)
+    currentPage: parseInt(req.query?.currentPage as string),
+    sortBy: req.query?.sortBy as string,
+    orderBy: req.query?.orderBy as string
   }
 
   const [expenseError, paginatedData] = await to(getExpensesDetailByUser(
     userId,
-    paginateParams,
+    options,
   ));
 
   if (expenseError) {
-    return next(new ApiError(expenseError, expenseError.status, `Could not get user expenses: ${expenseError}`, expenseError.title, req));
+    return next(new ApiError(
+      expenseError, 
+      expenseError.status, 
+      `Could not get user expenses: ${expenseError}`, 
+      expenseError.title, req
+    ));
   }
 
   if (!paginatedData) {

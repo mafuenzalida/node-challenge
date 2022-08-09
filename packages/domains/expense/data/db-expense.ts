@@ -1,14 +1,25 @@
 import knex from '@nc/utils/db/knex';
-import { IPaginateParams } from 'knex-paginate';
+import { QueryOptions } from '@nc/utils/types';
 
-async function getExpensesByUser(userId: string, paginateParams?: IPaginateParams) {
-  return await knex.select('*')
+async function getExpensesByUser(userId: string, options?: QueryOptions) {
+  if (options.orderBy) {
+    return await knex.select('*')
+    .from('expenses')
+    .where('user_id', userId)
+    .orderBy(options.sortBy,options.orderBy)
+    .paginate({ 
+      perPage: options.perPage || 10,
+      currentPage: options.currentPage || 1,
+    })
+  } else {
+    return await knex.select('*')
     .from('expenses')
     .where('user_id', userId)
     .paginate({ 
-      perPage: paginateParams?.perPage || 10,
-      currentPage: paginateParams?.currentPage || 1,
+      perPage: options.perPage || 10,
+      currentPage: options.currentPage || 1,
     })
+  }
 }
 
 export {
