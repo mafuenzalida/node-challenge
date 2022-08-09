@@ -15,27 +15,50 @@ const fakePagination = {
   to: 1
 }
 const fakeDbUserExpenses = {
-  data : [{
+  data : [
+    {
+      id: 'some-id',
+      user_id: 'user-id',
+      merchant_name: 'some-merchant',
+      currency: 'USD',
+      amount_in_cents: 10,
+      status: 'pending',
+      date_created: 'some-date',
+    },
+    {
+      id: 'some-id-2',
+      user_id: 'user-id',
+      merchant_name: 'some-merchant-2',
+      currency: 'EUR',
+      amount_in_cents: 5,
+      status: 'processed',
+      date_created: 'some-date-2',
+    }
+  ],
+  pagination: fakePagination
+}
+const fakeUserExpensesDataResponse = [
+  {
     id: 'some-id',
     user_id: 'user-id',
     merchant_name: 'some-merchant',
     currency: 'USD',
     amount_in_cents: 10,
-    status: 'pending',
+    status: 'PENDING',
     date_created: 'some-date',
-  }],
-  pagination: fakePagination
-}
-const fakeUserExpensesDataResponse = [{
-  id: 'some-id',
-  user_id: 'user-id',
-  merchant_name: 'some-merchant',
-  currency: 'USD',
-  amount_in_cents: 10,
-  status: 'PENDING',
-  date_created: 'some-date',
-  date_updated: null,
-}]
+    date_updated: null,
+  },
+  {
+    id: 'some-id-2',
+    user_id: 'user-id',
+    merchant_name: 'some-merchant-2',
+    currency: 'EUR',
+    amount_in_cents: 5,
+    status: 'PROCESSED',
+    date_created: 'some-date-2',
+    date_updated: null,
+  },
+]
 
 describe('V1-get-expenses routes tests', () => {
   beforeAll(() => {
