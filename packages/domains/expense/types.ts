@@ -11,7 +11,7 @@ enum ExpenseStatus {
 interface Expense {
   id: string
   user_id: string
-  merchant_name: number
+  merchant_name: string
   currency: Currency
   amount_in_cents: number
   status: ExpenseStatus
@@ -19,8 +19,15 @@ interface Expense {
   date_updated: Date
 }
 
+interface IExpenseQueryFilters {
+  merchant_name: string,
+  status: string,
+  date_created: string
+}
+
 export {
   Expense,
   ExpenseStatus,
-  Currency
+  Currency,
+  IExpenseQueryFilters
 }

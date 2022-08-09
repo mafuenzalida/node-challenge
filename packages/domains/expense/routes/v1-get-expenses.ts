@@ -14,10 +14,16 @@ router.get('/get-expenses-by-user', async (req, res, next) => {
     sortBy: req.query?.sortBy as string,
     orderBy: req.query?.orderBy as string
   }
+  const filters = {
+    merchant_name: req.query?.merchant_name as string,
+    status: req.query?.status as string,
+    date_created: req.query?.date_created as string
+  }
 
   const [expenseError, paginatedData] = await to(getExpensesDetailByUser(
     userId,
     options,
+    filters,
   ));
 
   if (expenseError) {
