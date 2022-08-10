@@ -1,4 +1,3 @@
-import { raw } from 'express';
 import { Expense, Currency, ExpenseStatus } from './types';
 
 function formatExpense(rawExpense): Expense {
@@ -15,9 +14,10 @@ function formatExpense(rawExpense): Expense {
 }
 
 function formatExpenses(rawExpenses): Expense[] {
-  return rawExpenses.map( rawExpense => formatExpense(rawExpense))
+  return rawExpenses?.map( rawExpense => formatExpense(rawExpense))
 }
 
 export {
+  formatExpense,
   formatExpenses
 }
