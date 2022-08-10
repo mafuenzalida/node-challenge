@@ -3,6 +3,7 @@ import { Router } from 'express';
 import { to } from '@nc/utils/async';
 import { getExpensesDetailByUser } from '../model';
 import QueryValidators from '../middlewares/query-validator';
+import { secureTrimExpenses } from '../formatter';
 
 export const router = Router();
 
@@ -39,5 +40,8 @@ router.get('/get-expenses-by-user', QueryValidators('expense_by_user_query'), as
     return res.json({});
   }
 
-  return res.json(paginatedData)
+  return res.json({
+    data: secureTrimExpenses(paginatedData.data),
+    pagination: paginatedData.pagination  
+  })
 });

@@ -1,5 +1,7 @@
 import { Expense, Currency, ExpenseStatus } from './types';
 
+const expensePublicFields = ['merchant_name', 'amount_in_cents', 'currency', 'status', 'date_created']
+
 function formatExpense(rawExpense: any): Expense {
   return {
     id: rawExpense.id,
@@ -17,7 +19,18 @@ function formatExpenses(rawExpenses: any): Expense[] {
   return rawExpenses?.map( rawExpense => formatExpense(rawExpense))
 }
 
+function secureTrimExpense(expense: Expense): object {
+  return JSON.parse(JSON.stringify(expense, expensePublicFields));
+}
+
+function secureTrimExpenses(expenses: Expense[]): object[] {
+  return expenses?.map( expense => secureTrimExpense(expense));
+}
+
+
 export {
   formatExpense,
-  formatExpenses
+  formatExpenses,
+  secureTrimExpense,
+  secureTrimExpenses
 }
