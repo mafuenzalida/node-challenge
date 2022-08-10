@@ -6,7 +6,7 @@ describe("testing-expense-v1-routes", () => {
   it("GET /get-expenses-by-user - success", async () => {
     const { body } = await Api.get(expenseV1Route + '/get-expenses-by-user')
       .query({ userId: 'e17825a6-ad80-41bb-a76b-c5ee17b2f29d' });
-    expect(body).toEqual([
+    expect(body.data).toEqual([
       {
         id: "55987cc7-7830-442a-a52f-ca0326d9d3b1",
         user_id: "e17825a6-ad80-41bb-a76b-c5ee17b2f29d",
