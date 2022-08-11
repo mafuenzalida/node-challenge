@@ -9,6 +9,8 @@ import { router as userRoutes } from '@nc/domain-user';
 import { router as expenseRoutes } from '@nc/domain-expense';
 import { createServer as createHTTPServer, Server } from 'http';
 import { createServer as createHTTPSServer, Server as SecureServer } from 'https';
+import swaggerUI from 'swagger-ui-express';
+import { swaggerDocument } from './swagger';
 
 const logger = Logger('server');
 const app = express();
@@ -28,6 +30,7 @@ app.get('/healthcheck', function healthcheckEndpoint(req, res) {
 
 app.use(context);
 app.use(security);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use('/user', userRoutes);
 app.use('/expense', expenseRoutes);
