@@ -1,6 +1,7 @@
 enum Currency {
   EUR = 'EUR',
   USD = 'USD',
+  DKK = 'DKK',
 }
 
 enum ExpenseStatus {
