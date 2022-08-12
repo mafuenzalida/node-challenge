@@ -52,7 +52,37 @@ The command above will run the following test suites sequentially:
 -------------|-------------|-------------|
 | Unit | `yarn test:unit` | Simple unit tests. |
 | Mid-level | `yarn test:mid-level` | Small integration tests that integration of small components together.  |
-| Acceptances | `yarn test:acceptance` | Large integration tests, system tests, end-to-end tests. |
+| Acceptances | `yarn test:acceptance` | Large integration tests, system tests, end-to-end tests. Be sure to have the project running. |
 
 
 Happy hacking 😁!
+
+
+## Thought Process
+
+Before doing anything with the project I started reviewing this Readme and the repo to get a good grasp of what were the objectives to accomplish and how the app worked.
+With all the information processed, I came up with a list of stuff to be done for the challenge:
+
+- Setup the work environment
+- Setup the backbone of the new expense module
+- Add kinex as a querybuilder to ease up query development (for the task and hipotetic next features)
+- Build a simple route getting the expenses out of the db
+- Add pagination, filtering and sorting to the route
+- Add an input validator
+- Add swagger to document routes
+- *Always add and update tests throught all development
+
+Everything was built using the previous list as a guide. Always mantaining and extending the current  project's structure (important to mantain conventions in existing projects).
+Some decisions made:
+- The focus for the challenge was on building the new route using best practices, adding all kind of features to it, use of good typing, and adding good test coverage.
+- Some tweaks to the existing domain were made, but just enough to keep it similar with the new one
+- Models, inputs, and ouputs were based on existing data given in the project
+- Everything new was built thinking in extensibility (in the hipotetic case that this was going to be continued)
+
+Finally, as mentioned there are a lot of more things that could be done, but as time is not infinite, I leave some of them here as ideas:
+- Move pagination definitions to a more general place so it can be reused in a simpler way
+- Add more routes as getting all expenses, or getting all the expenses for users in a same company, to give some examples.
+- Add authentication (e.g. using jwt)
+- Resolve some problems with dependencies
+- Update user routes to use knex too
+- ...
