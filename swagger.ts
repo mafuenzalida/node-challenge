@@ -1,4 +1,5 @@
 import { getExpensesByUser } from './docs/expenses.swagger';
+import { getUserDetails } from './docs/user.swagger';
 
 export const swaggerDocument = {
   openapi: '3.0.0',
@@ -15,8 +16,11 @@ export const swaggerDocument = {
     name: 'Expenses'
   },
   paths: {
+    "/v1/user/get-user-details": {
+        "get": getUserDetails
+    },
     "/v1/expenses/get-expenses-by-user": {
         "get": getExpensesByUser
-    }
+    },
   },
 }
